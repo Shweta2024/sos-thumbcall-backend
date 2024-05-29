@@ -1,9 +1,8 @@
 const express = require('express')
+const addSettings = require('../controllers/settingsController')
 const router = express.Router()
 
-router.post('/settings', (req, res) => {
-    console.log(req.body)
-})
+router.post('/settings', addSettings)
 
 module.exports = router
 
