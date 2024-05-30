@@ -1,17 +1,28 @@
+require('dotenv').config()
 const express = require('express')
+const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const PORT = process.env.PORT || 5000
-
 const authRoutes = require('./routes/authRoutes')
 const settingsRoutes = require('./routes/settingsRoutes')
+const PORT = process.env.PORT || 5000
+
 
 const app = express()
 
+
 // middlewares
 app.use(express.json())
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }))
+
+
+// connect to db
+mongoose.connect(process.env.DB_CONNECTION_STRING)
+
+
+// routes
 app.use(authRoutes)
 app.use(settingsRoutes)
+
 
 app.listen(PORT, (req, res) => {
     console.log(`server started at port: ${PORT}`)
