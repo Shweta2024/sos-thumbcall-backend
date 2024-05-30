@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const userSchema = mongoose.Schema({
+const hospitalSchema = mongoose.Schema({
     role: {
         type: String,
         required: true
@@ -21,9 +21,9 @@ const userSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please enter a password']
     }
-},{
+}, {
     timestamps: true
 })
 
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Hospital', hospitalSchema)

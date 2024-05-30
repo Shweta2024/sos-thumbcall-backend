@@ -1,13 +1,11 @@
 const mongoose = require('mongoose')
 
-const settingsSchema = mongoose.Schema({
+
+const hospitalSettingsSchema = mongoose.Schema({
     userID: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: 'User' // reference of the user model
-    },
-    role: {
-        type: String
+        ref: 'Hospital' // reference of the user model
     },
     address1: {
         type: String,
@@ -39,13 +37,10 @@ const settingsSchema = mongoose.Schema({
     defaultPhoneNo: {
         type: String,
         required: true        
-    },
-    emergencyPreference: {
-        type: String
     }
 }, {
     timestamps: true
 })
 
 
-module.exports = mongoose.model('Settings', settingsSchema)
+module.exports = mongoose.model('HospitalSetting', hospitalSettingsSchema)
