@@ -44,5 +44,31 @@ const addSettings = async(req, res) => {
     }
 }
 
+const updateSettings = async (req, res) => {
+    try {
+        const addressID = req.params.id
 
-module.exports = addSettings
+        if (req.user.role === 'Patient') {
+            const updatedAddress = await PatientSettings.findOneAndUpdate(
+                { _id: addressID },
+                req.body,
+                { new: true }
+            )
+        } else {
+            const updatedAddress = await HospitalSettings.findOneAndUpdate(
+                { _id: addressID },
+                req.body,
+                { new: true }
+            )
+        }
+        res.status(200).send('address updated successfully' )
+    } catch (err) {
+        res.status(400).send('Failed to update address!')
+    }
+}
+
+
+module.exports = {
+    addSettings,
+    updateSettings
+}

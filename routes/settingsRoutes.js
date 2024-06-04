@@ -1,10 +1,12 @@
 const express = require('express')
-const addSettings = require('../controllers/settingsController')
+const {addSettings, updateSettings} = require('../controllers/settingsController')
 const verifyToken = require('../middlewares/verifyToken')
 const router = express.Router()
 
 
 router.post('/settings', verifyToken, addSettings)
+
+router.put('/settings/:id', verifyToken, updateSettings)
 
 module.exports = router
 
