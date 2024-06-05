@@ -20,7 +20,7 @@ const addSettings = async(req, res) => {
             })
 
             settings.save()
-            res.status(200).send('patient settings details saved!')
+            res.status(200).json({ sucess: true })
         }
         else {
             const settings = new HospitalSettings({
@@ -36,11 +36,11 @@ const addSettings = async(req, res) => {
             })
 
             settings.save()
-            res.status(200).send('hospitals settings details saved!')       
+            res.status(200).json({ sucess: true })     
         }
     }
     catch (error) {
-        res.status(400).send(error)
+        res.status(400).json({ sucess: false })
     }
 }
 
@@ -61,9 +61,9 @@ const updateSettings = async (req, res) => {
                 { new: true }
             )
         }
-        res.status(200).send('address updated successfully' )
+        res.status(200).json({ sucess: true })
     } catch (err) {
-        res.status(400).send('Failed to update address!')
+        res.status(400).json({ sucess: false })
     }
 }
 

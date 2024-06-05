@@ -11,7 +11,7 @@ const getAllPatient = async() => {
         return patientList
     }
     catch(error) {
-        res.status(400).send('Failed to fetch list of patient!')
+        res.status(400).json({ sucess: false })
     }
 }
 
@@ -23,7 +23,7 @@ const getAllHospital = async() => {
         return hospitalList
     }
     catch (error) {
-        res.status(400).send('Failed to fetch list of hospitals!')
+        res.status(400).json({ sucess: false })
     }
 }
 
@@ -35,7 +35,7 @@ const getAllHospitalAddress = async() => {
         return hospitalAddressList
     }
     catch (error) {
-        res.status(400).send('Failed to fetch addresses of hospitals!')
+        res.status(400).json({ sucess: false })
     }
 }
 
@@ -47,7 +47,7 @@ const getPatientByID = async(userID) => {
         return patient
     }
     catch (error) {
-        res.status(400).send(`Failed to fetch details of ${userID}!`)
+        res.status(400).json({ sucess: false })
     }
 }
 
@@ -59,7 +59,7 @@ const getHospitalByID = async(userID) => {
         return hospital
     }
     catch (error) {
-        res.status(400).send(`Failed to fetch details of ${userID}!`)
+        res.status(400).json({ sucess: false })
     }
 }
 
