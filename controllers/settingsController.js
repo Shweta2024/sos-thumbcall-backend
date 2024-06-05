@@ -48,7 +48,7 @@ const addSettings = async(req, res) => {
 
 const updateSettings = async (req, res) => {
     try {
-        const addressID = req.params.id
+        const addressID = req.user.id
 
         if (req.user.role === 'Patient') {
             const updatedAddress = await PatientSettings.findOneAndUpdate(

@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.post('/settings', verifyToken, addSettings)
 
-router.put('/settings/:id', verifyToken, updateSettings)
+router.put('/settings', verifyToken, updateSettings)
 
 module.exports = router
 

@@ -41,10 +41,15 @@ const getAllHospitalAddress = async() => {
 
 
 // Function to get patient details by user ID
-const getPatientByID = async(userID) => {
+const getPatientByEmail = async(req, res) => {
     try {
-        const patient = await PatientSettings.findOne({ userID: userID })
-        return patient
+        const email = req.body.email
+        const user = await Patient.findOne({ email: email })
+        const settings = await PatientSettings.findOne({ email: email })
+        if (!user) {
+            res.status(400).json({sucess: false})
+        }
+        res.status(200).json({sucess: true, user: user, settings: settings}) 
     }
     catch (error) {
         res.status(400).json({ sucess: false })
@@ -53,10 +58,15 @@ const getPatientByID = async(userID) => {
 
 
 // Function to get hospital details by user ID
-const getHospitalByID = async(userID) => {
+const getHospitalByEmail = async(req, res) => {
     try {
-        const hospital = await HospitalSettings.findOne({ userID: userID })
-        return hospital
+        const email = req.body.email
+        const user = await Hospital.findOne({ email: email })
+        const settings = await HospitalSettings.findOne({ email: email })
+        if (!user) {
+            res.status(400).json({sucess: false})
+        }
+        res.status(200).json({ sucess: true, user: user, settings: settings })
     }
     catch (error) {
         res.status(400).json({ sucess: false })
@@ -91,7 +101,7 @@ module.exports = {
     getAllPatient,
     getAllHospital,
     getAllHospitalAddress,
-    getPatientByID,
-    getHospitalByID,
+    getPatientByEmail,
+    getHospitalByEmail,
     getNearestHospital
 }
