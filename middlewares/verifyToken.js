@@ -6,7 +6,7 @@ const verifyToken = (req, res, next) => {
     
     // Check if the auth-token header is present in the request
     if (!res.header('auth-token')) {
-        return res.status(401).send('access denied!')    
+        return res.status(401).json({ sucess: false })
     }
 
     try {
@@ -16,7 +16,7 @@ const verifyToken = (req, res, next) => {
         next()
     }
     catch (error) {
-        res.status(400).send('invalid token!')
+        res.status(400).json({ sucess: false })
     }
 }
 

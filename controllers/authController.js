@@ -22,7 +22,7 @@ const registerUser = async(req, res) => {
 
         // check if user already exists
         if (isUserPresent) {
-            res.status(400).send('message: user already exists!')
+            res.status(400).json({ sucess: false })
         }
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -43,13 +43,10 @@ const registerUser = async(req, res) => {
             user.save()
         }
 
-        res.status(200).send({
-            "email": registerDetails.email,
-            "name": registerDetails.name
-        })
+        res.status(200).json({ sucess: true })
     }
     catch (error) {
-        res.status(400).send(error)
+        res.status(400).json({ sucess: false, error: error })
     }
     
 }
@@ -61,13 +58,13 @@ const loginUser = async(req, res) => {
         const user = await userExists(email, role)
 
         if (!user) {
-            res.status(400).send('message: user not found!')
+            res.status(400).json({ sucess: false })
         }
 
         const verifyUser = await bcrypt.compare(password, user.password)
 
         if (!verifyUser) {
-            res.status(400).send('message: incorrect password!')
+            res.status(400).json({ sucess: false})
         }
 
         const token = jwt.sign({
@@ -78,11 +75,10 @@ const loginUser = async(req, res) => {
         }, process.env.JWT_SECRET)
         
         res.header('auth-token', token)
-        console.log(token)
-        res.status(200).send(`${user.name} logged in!`)
+        res.status(200).json({ sucess: true, token: token })
     }
     catch (error) {
-        res.status(400).send(error)
+        res.status(400).json({ sucess: false, error: error })
     }
 }
 
