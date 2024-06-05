@@ -29,5 +29,5 @@ app.use(settingsRoutes)
 
 
 app.listen(PORT, (req, res) => {
-    console.log(`server started at port: ${PORT}`)
+    console.log(`Server started at port: ${PORT}`)
 })
