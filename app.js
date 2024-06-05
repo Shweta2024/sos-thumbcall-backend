@@ -4,6 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const authRoutes = require('./routes/authRoutes')
+const statusRoutes = require('./routes/statusRoutes')
 const settingsRoutes = require('./routes/settingsRoutes')
 const PORT = process.env.PORT || 5000
 
@@ -26,6 +27,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING)
 // routes
 app.use(authRoutes)
 app.use(settingsRoutes)
+app.use(statusRoutes)
 
 
 app.listen(PORT, (req, res) => {
