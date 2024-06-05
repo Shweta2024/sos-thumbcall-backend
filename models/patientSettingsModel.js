@@ -44,7 +44,8 @@ const patientSettingsSchema = mongoose.Schema({
     },
     emergencyPreference: {
         type: String,
-        required: true
+        required: true,
+        default: 'buttonClick'
     }
 }, {
     timestamps: true
