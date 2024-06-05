@@ -75,7 +75,7 @@ const loginUser = async(req, res) => {
         }, process.env.JWT_SECRET)
         
         res.header('auth-token', token)
-        res.status(200).json({ sucess: true, token: token })
+        res.status(200).json({ sucess: true, token: token , user: user})
     }
     catch (error) {
         res.status(400).json({ sucess: false, error: error })
