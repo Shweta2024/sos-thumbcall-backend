@@ -17,9 +17,9 @@ const getAllPatient = async() => {
 
 
 // Function to get all hospitals
-const getAllHospital = async() => {
+const getAllHospital = async(req, res) => {
     try {
-        const hospitalList = await Hospital.find
+        const hospitalList = await Hospital.find()
         return hospitalList
     }
     catch (error) {
@@ -64,10 +64,34 @@ const getHospitalByID = async(userID) => {
 }
 
 
+getNearestHospital = async(email) => {
+    const user = await PatientSettings.findOne({ email: email })
+
+    if (!user) {
+        res.json({sucess: false})    
+    }
+
+    const { pincode, city, state } = user
+    console.log(pincode)
+    let nearestHostpital = await HospitalSettings.find({ pincode: pincode })
+    if (nearestHostpital.length == 0) {
+        nearestHostpital = await HospitalSettings.find({ city: city })
+    }
+    if (nearestHostpital.length == 0) {
+        nearestHostpital = await HospitalSettings.find({ state: state })
+    }
+    const randomIndex = Math.floor(Math.random() * nearestHostpital.length)
+    console.log(nearestHostpital[randomIndex])
+    
+    return nearestHostpital[randomIndex]
+}
+
+
 module.exports = {
     getAllPatient,
     getAllHospital,
     getAllHospitalAddress,
     getPatientByID,
-    getHospitalByID
+    getHospitalByID,
+    getNearestHospital
 }

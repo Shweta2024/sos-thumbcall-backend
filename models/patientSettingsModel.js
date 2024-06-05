@@ -7,6 +7,10 @@ const patientSettingsSchema = mongoose.Schema({
         required: true,
         ref: 'Patient' // reference of the user model
     },
+    email: {
+        type: String,
+        required: true
+    },
     address1: {
         type: String,
         required: [true, 'Please enter your address']

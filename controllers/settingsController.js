@@ -8,6 +8,7 @@ const addSettings = async(req, res) => {
         if(req.user.role === 'Patient'){
             const settings = new PatientSettings ({
             userID: req.user.id,
+            email: req.user.email,
             address1: req.body.address1,
             address2: req.body.address2,
             city: req.body.city,
@@ -25,6 +26,7 @@ const addSettings = async(req, res) => {
         else {
             const settings = new HospitalSettings({
                 userID: req.user.id,
+                email: req.user.email,
                 address1: req.body.address1,
                 address2: req.body.address2,
                 city: req.body.city,
