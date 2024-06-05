@@ -3,9 +3,9 @@ const router = express.Router()
 const { getPatientByEmail, getHospitalByEmail } = require('../controllers/userController')
 
 
-router.get('/patient', getPatientByEmail)
+router.post('/patient', getPatientByEmail)
 
-router.get('/hospital', getHospitalByEmail)
+router.post('/hospital', getHospitalByEmail)
 
 
 module.exports = router
